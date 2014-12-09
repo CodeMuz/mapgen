@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <title>JS-XLS Live Demo</title>
+    <title>Mosquito_Collection_Data</title>
     <style>
         html,
         body,
@@ -26,17 +26,44 @@
         #b64data {
             width: 100%;
         }
+        h1{
+            margin:auto;
+            margin-top: 20px;
+            font-family: monospace;
+            width:70%;
+        }
+        #map-canvas{
+            width:90%;
+            margin:auto;
+            box-shadow: 0 0px 20px grey;        }
+        .input-file-div{
+            padding: 10px;
+            margin: 20px auto;
+            width: 30%;
+            background: lightblue;
+            border-radius: 10px;
+            border: 1px solid grey;
+            min-width: 400px;
+            box-shadow: 0 0 20px grey;
+        }
+        .input-file-div input{
+            width: 160px;    
+        }
+        
     </style>
 </head>
 
 <body>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <h1>Map generator demo</h1>
+    <h1>Insecticide Susceptibility Map Plotter v1.0 December 2014</h1>
+
+<div class="input-file-div" >
+
+        <input  type="file" name="xlfile" id="xlf" />
+        <-- Please click here to select a file
+</div>
 
 
-    <p>
-        <input type="file" name="xlfile" id="xlf" />
-        <-- Please click here to select a file</p>
             <div style="display:none;">
                 Use Web Workers: (when available)
                 <input type="checkbox" name="useworker" checked> Use Transferrables: (when available)
@@ -281,7 +308,7 @@
 
     function handleFile(e) {
         rABS = document.getElementsByName("userabs")[0].checked;
-        use_worker = document.getElementsByName("useworker")[0].checked;
+        use_worker = false;//document.getElementsByName("useworker")[0].checked;
         var files = e.target.files;
         var f = files[0]; {
             var reader = new FileReader();
@@ -305,6 +332,7 @@
                     }
                     process_wb(wb);
                 }
+                alert("Data points uploaded successfully");
             };
             if (rABS) reader.readAsBinaryString(f);
             else reader.readAsArrayBuffer(f);
